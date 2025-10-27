@@ -1,4 +1,4 @@
-baseURL: "https://federicotorrielli.github.io/" 
+baseURL: "https://federicotorrielli.github.io/"
 title: Federico Torrielli
 theme: PaperMod
 
@@ -8,106 +8,106 @@ pagination:
   pagerSize: 20
 
 taxonomies:
-    tag: tags
+  tag: tags
 
 menu:
-    main:
-        - name: Papers
-          url: papers/
-          weight: 1
-        - name: Projects
-          url: projects/
-          weight: 2
-        - name: Courses
-          url: courses/
-          weight: 3
-        - name: Blog
-          url: https://federicotorrielli.github.io/blog/
-          weight: 4
+  main:
+    - name: Papers
+      url: papers/
+      weight: 1
+    - name: Projects
+      url: projects/
+      weight: 2
+    - name: Courses
+      url: courses/
+      weight: 3
+    - name: Blog
+      url: https://federicotorrielli.github.io/blog/
+      weight: 4
 
 params:
-    description: "Federico Torrielli is a Ph.D. candidate in Generative Artificial Intelligence and researcher specializing in the safety and alignment of large-scale AI systems. This website hosts his research papers, course materials, data, curriculum vitae, and contact information."
-    author: Federico Torrielli
-    # googleAnalyticsID: "G-XXXXX"
-    DateFormat: "January 2006"
-    defaultTheme: light
-    hideFooter: true
-    disableThemeToggle: true
-    ShowShareButtons: false
-    ShowReadingTime: false
-    disableSpecial1stPost: true
-    disableAnchoredHeadings: true
-    ShowPostNavLinks: false
-    ShowBreadCrumbs: false
-    ShowCodeCopyButtons: true
-    ShowAllPagesInArchive: false
-    MainSections: ["papers","projects","courses"]
-    ShowToc: false
-    disableScrollToTop: true
-    TocOpen: true
-    ShowWordCount: false
-    UseHugoToc: true
-    comments: false
-    math: true
-    profileMode:
-          enabled: true
-          title: Federico Torrielli
-          subtitle: "I am a Ph.D. candidate in Generative Artificial Intelligence at the University of Torino, specializing in AI Safety, LLM Alignment, and Human-AI Interaction. My work bridges technical development with interdisciplinary analysis to mitigate risks from general-purpose AI systems."
-          imageUrl: "https://www.evilscript.eu/images/pfp.webp"
-          imageWidth: 160
-          imageHeight: 160
-          buttons:
-            - name: Papers
-              url: papers/
-            - name: Projects
-              url: projects/
-            - name: Courses
-              url: courses/
-            - name: Tags
-              url: tags/
-            - name: Archive
-              url: archive/
-            - name: Blog
-              url: https://federicotorrielli.github.io/blog/
+  description: "Federico Torrielli is a Ph.D. candidate in Generative Artificial Intelligence and researcher specializing in the safety and alignment of large-scale AI systems. This website hosts his research papers, course materials, data, curriculum vitae, and contact information."
+  author: Federico Torrielli
+  # googleAnalyticsID: "G-XXXXX"
+  DateFormat: "January 2006"
+  defaultTheme: light
+  hideFooter: true
+  disableThemeToggle: true
+  ShowShareButtons: false
+  ShowReadingTime: false
+  disableSpecial1stPost: true
+  disableAnchoredHeadings: true
+  ShowPostNavLinks: false
+  ShowBreadCrumbs: false
+  ShowCodeCopyButtons: true
+  ShowAllPagesInArchive: false
+  MainSections: ["papers", "projects", "courses"]
+  ShowToc: false
+  disableScrollToTop: true
+  TocOpen: true
+  ShowWordCount: false
+  UseHugoToc: true
+  comments: false
+  math: true
+  profileMode:
+    enabled: true
+    title: Federico Torrielli
+    subtitle: "I am a Ph.D. candidate in Generative Artificial Intelligence at the University of Torino, specializing in AI Safety, LLM Alignment, and Human-AI Interaction. My work bridges technical development with interdisciplinary analysis to mitigate risks from general-purpose AI systems. In my free time, I also write on LessWrong and the AI Alignment Forum under a pseudonym."
+    imageUrl: "https://www.evilscript.eu/images/pfp.webp"
+    imageWidth: 160
+    imageHeight: 160
+    buttons:
+      - name: Papers
+        url: papers/
+      - name: Projects
+        url: projects/
+      - name: Courses
+        url: courses/
+      - name: Tags
+        url: tags/
+      - name: Archive
+        url: archive/
+      - name: Blog
+        url: https://federicotorrielli.github.io/blog/
 
-    socialIcons:
-        - name: CV
-          url: https://www.evilscript.eu/files/CV.pdf
-        - name: Email
-          url: mailto:federico.torrielli@unito.it
-        - name: Webex
-          url: https://unito.webex.com/meet/federico.torrielli
-        - name: Location
-          url: location/
-        - name: Google Scholar
-          url: https://scholar.google.com/citations?user=E9s2cKAAAAAJ
-        - name: GitHub
-          url: https://github.com/federicotorrielli
-        - name: LinkedIn
-          url: https://www.linkedin.com/in/federico-torrielli/
-        - name: Twitter
-          url: https://x.com/FedExMachina
-        - name: Instagram
-          url: https://www.instagram.com/federicotorrielli/?hl=en
+  socialIcons:
+    - name: CV
+      url: https://www.evilscript.eu/files/CV.pdf
+    - name: Email
+      url: mailto:federico.torrielli@unito.it
+    - name: Webex
+      url: https://unito.webex.com/meet/federico.torrielli
+    - name: Location
+      url: location/
+    - name: Google Scholar
+      url: https://scholar.google.com/citations?user=E9s2cKAAAAAJ
+    - name: GitHub
+      url: https://github.com/federicotorrielli
+    - name: LinkedIn
+      url: https://www.linkedin.com/in/federico-torrielli/
+    - name: Twitter
+      url: https://x.com/FedExMachina
+    - name: Instagram
+      url: https://www.instagram.com/federicotorrielli/?hl=en
 
-    assets:
-        disableScrollBarStyle: true
-    cover:
-        hiddenInList: false
-        hiddenInSingle: true
-    label:
-      text: "Federico Torrielli"
-      icon: favicon.ico
-      iconHeight: 18
+  assets:
+    disableScrollBarStyle: true
+  cover:
+    hiddenInList: false
+    hiddenInSingle: true
+  label:
+    text: "Federico Torrielli"
+    icon: favicon.ico
+    iconHeight: 18
 
 markup:
-    goldmark:
-        renderer:
-            unsafe: true
-    highlight:
-        guessSyntax: true
-        style: autumn 
-    tableOfContents:
-        endLevel: 2
-        ordered: false
-        startLevel: 2
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    guessSyntax: true
+    style: autumn
+  tableOfContents:
+    endLevel: 2
+    ordered: false
+    startLevel: 2
