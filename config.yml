@@ -53,7 +53,7 @@ params:
           enabled: true
           title: Federico Torrielli
           subtitle: "I am a Ph.D. candidate in Generative Artificial Intelligence at the University of Torino, specializing in AI Safety, LLM Alignment, and Human-AI Interaction. My work bridges technical development with interdisciplinary analysis to mitigate risks from general-purpose AI systems."
-          imageUrl: "https://www.evilscript.eu/images/pfp-mod.webp"
+          imageUrl: "https://www.evilscript.eu/images/pfp.webp"
           imageWidth: 160
           imageHeight: 160
           buttons:
