@@ -31,7 +31,7 @@ params:
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
     defaultTheme: light
-    hideFooter: false
+    hideFooter: true
     disableThemeToggle: true
     ShowShareButtons: false
     ShowReadingTime: false
@@ -46,7 +46,7 @@ params:
     disableScrollToTop: true
     TocOpen: true
     ShowWordCount: false
-    UseHugoToc: false
+    UseHugoToc: true
     comments: false
     math: true
     profileMode:
