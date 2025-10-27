@@ -21,9 +21,12 @@ menu:
     - name: Courses
       url: courses/
       weight: 3
+    - name: Get to Know Me
+      url: about/
+      weight: 4
     - name: Blog
       url: https://federicotorrielli.github.io/blog/
-      weight: 4
+      weight: 5
 
 params:
   description: "Federico Torrielli is a Ph.D. candidate in Generative Artificial Intelligence and researcher specializing in the safety and alignment of large-scale AI systems. This website hosts his research papers, course materials, data, curriculum vitae, and contact information."
@@ -52,7 +55,7 @@ params:
   profileMode:
     enabled: true
     title: Federico Torrielli
-    subtitle: "I am a Ph.D. candidate in Generative Artificial Intelligence at the University of Torino, specializing in AI Safety, LLM Alignment, and Human-AI Interaction. My work bridges technical development with interdisciplinary analysis to mitigate risks from general-purpose AI systems. In my free time, I also write on LessWrong and the AI Alignment Forum under a pseudonym."
+    subtitle: "I am a Ph.D. candidate in Generative Artificial Intelligence at the University of Torino, specializing in AI Safety, LLM Alignment, and Human-AI Interaction. My work bridges technical development with interdisciplinary analysis to mitigate risks from general-purpose AI systems. In my free time, I also write on LessWrong, AI Alignment Forum, and Substack under a pseudonym. Holistic AI views are in my blog."
     imageUrl: "https://www.evilscript.eu/images/pfp.webp"
     imageWidth: 160
     imageHeight: 160
