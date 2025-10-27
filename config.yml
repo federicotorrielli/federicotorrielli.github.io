@@ -66,6 +66,8 @@ params:
         url: projects/
       - name: Courses
         url: courses/
+      - name: Get to Know Me
+        url: about/
       - name: Tags
         url: tags/
       - name: Archive
