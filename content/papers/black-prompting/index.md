@@ -28,12 +28,12 @@ Federico Torrielli, "Paint it, BLACK: a Novel Methodology for Prompting," in _Pr
 
 ```BibTeX
 @inproceedings{DBLP:conf/general/Torrielli23,
-	title        = {Paint it, {BLACK:} a Novel Methodology for Prompting},
+	title        = {Paint it, BLACK: a Novel Methodology for Prompting},
 	author       = {Federico Torrielli},
 	year         = 2023,
 	booktitle    = {Proceedings of the Workshop on GENerative, Explainable and Reasonable Artificial Learning co-located with the 15th Biannual Conference of the Italian {SIGCHI} Chapter {(CHITALY} 2023), Torino, Italy, September 20-22, 2023},
 	publisher    = {CEUR-WS.org},
-	series       = {{CEUR} Workshop Proceedings},
+	series       = {CEUR Workshop Proceedings},
 	volume       = 3571,
 	pages        = {3--11},
 	url          = {https://ceur-ws.org/Vol-3571/short1.pdf},

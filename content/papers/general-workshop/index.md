@@ -24,11 +24,11 @@ Luigi Di Caro, Amon Rapp, and Federico Torrielli, "GENERAL: GENerative, Explaina
 
 ```BibTeX
 @inproceedings{DBLP:conf/chitaly/CaroRT23,
-	title        = {{GENERAL:} GENerative, Explainable and Reasonable Artificial Learning},
+	title        = {GENERAL: GENerative, Explainable and Reasonable Artificial Learning},
 	author       = {Luigi Di Caro and Amon Rapp and Federico Torrielli},
 	year         = 2023,
-	booktitle    = {Proceedings of the 15th Biannual Conference of the Italian {SIGCHI} Chapter, CHItaly 2023, Torino, Italy, September 20-22, 2023},
-	publisher    = {{ACM}},
+	booktitle    = {Proceedings of the 15th Biannual Conference of the Italian SIGCHI Chapter, CHItaly 2023, Torino, Italy, September 20-22, 2023},
+	publisher    = {ACM},
 	pages        = {35:1--35:2},
 	doi          = {10.1145/3605390.3610821},
 	url          = {https://doi.org/10.1145/3605390.3610821},

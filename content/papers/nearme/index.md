@@ -39,7 +39,7 @@ Noemi Mauro, Liliana Ardissono, Federico Torrielli, Gianmarco Izzi, Claudio Matt
 	title        = {NearMe: Dynamic Exploration of Geographical Areas},
 	author       = {Noemi Mauro and Liliana Ardissono and Federico Torrielli and Gianmarco Izzi and Claudio Mattutino and Maurizio Lucenteforte and Marino Segnan},
 	year         = 2021,
-	booktitle    = {Human Interface and the Management of Information. Information Presentation and Visualization - Thematic Area, {HIMI} 2021, Held as Part of the 23rd {HCI} International Conference, {HCII} 2021, Virtual Event, July 24-29, 2021, Proceedings, Part {I}},
+	booktitle    = {Human Interface and the Management of Information. Information Presentation and Visualization - Thematic Area, HIMI 2021, Held as Part of the 23rd HCI International Conference, HCII 2021, Virtual Event, July 24-29, 2021, Proceedings, Part I},
 	publisher    = {Springer},
 	series       = {Lecture Notes in Computer Science},
 	volume       = 12765,
