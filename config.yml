@@ -46,7 +46,7 @@ params:
     disableScrollToTop: true
     TocOpen: true
     ShowWordCount: false
-    UseHugoToc: true
+    UseHugoToc: false
     comments: false
     math: true
     profileMode:
