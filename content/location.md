@@ -17,12 +17,12 @@ Ingresso da, C.so Svizzera 185, Via Pessinetto, 12, 10149 Torino TO
 
 #### Office address
 
-Piero Della Francesca Offices  
-Scala F, First Floor, PhD Offices  
-Department of Computer Science  
+Piero Della Francesca Offices
+Scala F, First Floor, PhD Offices
+Department of Computer Science
 University of Torino
 
-**Note:** I primarily work from home. For meetings, please schedule via [Webex](https://unito.webex.com/meet/federico.torrielli).
+**Note:** I primarily work from home. For meetings, please schedule via [Google Calendar](https://calendar.app.google/xbdTHtmASd8d7AjW6).
 
 ---
 
