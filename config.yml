@@ -29,7 +29,7 @@ menu:
       weight: 5
 
 params:
-  description: "Federico Torrielli is a Ph.D. candidate in Generative Artificial Intelligence and researcher specializing in the safety and alignment of large-scale AI systems. This website hosts his research papers, course materials, data, curriculum vitae, and contact information."
+  description: "Federico Torrielli is a Ph.D. candidate in Generative Artificial Intelligence and researcher specializing in the safety and alignment of large-scale AI systems. This website hosts his research papers, courses, curriculum vitae, and contact information."
   author: Federico Torrielli
   # googleAnalyticsID: "G-XXXXX"
   DateFormat: "January 2006"
