@@ -12,6 +12,17 @@ tags:
 author: ["F. Torrielli", "S. Locci", "A. Rapp", "L. Di Caro"]
 description: "A study on indirect prompt injection vulnerabilities in AI-assisted peer review systems. Preprint on Research Square."
 summary: "This study introduces the Author-Reviewer-Organizer (ARO) framework and presents a large-scale empirical assessment of indirect prompt injection in AI-assisted peer review, finding that hidden instructions are followed in 78% of cases for ChatGPT and 86% for Gemini."
+keywords:
+  - "indirect prompt injection peer review"
+  - "prompt injection academic peer review LLM"
+  - "hidden prompts manuscript peer review"
+  - "LLM assisted peer review security prompt injection"
+  - "AI reviewer prompt injection PDF"
+  - "indirect prompt injection untrusted document ingestion"
+  - "tool integrated LLM indirect prompt injection benchmark"
+  - "information flow control indirect prompt injection"
+  - "prompt injection PDF parsing LLM"
+  - "LLM reviewer attack surface paper"
 showToc: true
 disableAnchoredHeadings: false
 editPost:
