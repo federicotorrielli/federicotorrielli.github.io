@@ -1,0 +1,9 @@
+User-agent: *
+{{- if or (hugo.IsProduction) (eq .Site.Params.env "production") }}
+Allow: /
+Disallow: /search/
+Disallow: /404.html
+{{- else }}
+Disallow: /
+{{- end }}
+Sitemap: {{ "sitemap.xml" | absURL }}
