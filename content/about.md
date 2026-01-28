@@ -1,5 +1,5 @@
 ---
-title: "Get to Know Me"
+title: "About Me"
 date: 2025-10-27
 hidemeta: true
 description: "Beyond research and academia - Federico Torrielli's personal interests and hobbies."
@@ -7,17 +7,15 @@ description: "Beyond research and academia - Federico Torrielli's personal inter
 
 ---
 
-Look, you've probably seen the papers and the courses, and yeah, that's a big part of what I do. But I'm not just sitting around thinking about language models all day (though, admittedly, more than I'd like to admit).
-
 I read philosophy. A lot of it, when I have time. Absurdism mostly, and Camus is my favourite. Years ago [this video](https://youtu.be/Jv79l1b-eoI?si=a1GUff-Gs0s8HiHx) popped up on my YT feed and from that moment I was so convinced that I call myself an absurdist to this day.
 
-I play drums. Jazz when I want to get lost in it, math rock when I want my brain to hurt, alt rock when I just need to hit something loud. Started years ago and never really stopped.
+I play drums. Jazz, math rock, and alt rock. Started years ago and never really stopped.
 
 Gaming. Single-player RPGs specifically. It started with Skyrim, and everything went downhill from there. I like the quiet of it, the way a good story can pull you in. Btw, I never finished Skyrim. At one point, I just modded the game and continued playing it like it was GTA.
 
 My house? Pretty much a 3D printing lab at this point. Started printing little useful things, then it escalated. Now if something breaks or I need something weird, I just make it.
 
-I write poetry. Published a book in Italian (in 2017), actually. It's different from the formal stuff I usually write. Looser, more about sound and feeling than proving a point.
+I write poetry. Published a book in Italian (in 2017).
 
 I love food. I love all the food. I just hate pickles.
 
