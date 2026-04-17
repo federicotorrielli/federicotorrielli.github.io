@@ -68,10 +68,6 @@ params:
         url: courses/
       - name: Get to Know Me
         url: about/
-      - name: Tags
-        url: tags/
-      - name: Archive
-        url: archive/
       - name: Blog
         url: https://federicotorrielli.github.io/blog/
 
