@@ -29,7 +29,7 @@ menu:
       weight: 5
 
 params:
-  description: "Federico Torrielli is a Ph.D. candidate in Generative Artificial Intelligence and researcher specializing in the safety and alignment of large-scale AI systems. This website hosts his research papers, courses, curriculum vitae, and contact information."
+  description: "Federico Torrielli is a researcher specializing in the safety and alignment of large-scale AI systems. This website hosts his research papers, courses, curriculum vitae, and contact information."
   author: Federico Torrielli
   # googleAnalyticsID: "G-XXXXX"
   DateFormat: "January 2006"
@@ -72,8 +72,6 @@ params:
         url: https://federicotorrielli.github.io/blog/
 
   socialIcons:
-    - name: CV
-      url: https://www.evilscript.eu/files/CV.pdf
     - name: Email
       url: mailto:federico.torrielli@unito.it
     - name: Webex
@@ -86,8 +84,6 @@ params:
       url: https://github.com/federicotorrielli
     - name: LinkedIn
       url: https://www.linkedin.com/in/federico-torrielli/
-    - name: Twitter
-      url: https://x.com/FedExMachina
     - name: Instagram
       url: https://www.instagram.com/federicotorrielli/?hl=en
 

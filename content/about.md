@@ -13,22 +13,20 @@ I play drums. Jazz, math rock, and alt rock. Started years ago and never really 
 
 Gaming. Single-player RPGs specifically. It started with Skyrim, and everything went downhill from there. I like the quiet of it, the way a good story can pull you in. Btw, I never finished Skyrim. At one point, I just modded the game and continued playing it like it was GTA.
 
-My house? Pretty much a 3D printing lab at this point. Started printing little useful things, then it escalated. Now if something breaks or I need something weird, I just make it.
+I like 3D printing stuff, including minis.
 
 I write poetry. Published a book in Italian (in 2017).
 
 I love food. I love all the food. I just hate pickles.
 
-I use Linux, arch btw. I have my own distro, forked from CachyOS. I use GNOME. I write my own scripts.
-
-Oh, and I run two tabletop campaigns right now! D&D and Daggerheart. Being a GM is half storytelling, half improv comedy, half crisis management. Yes, that's three halves, that's how it feels.
+I use Linux, arch btw. I use GNOME. I write my own scripts.
 
 So yeah. I do some things. We contain multitudes or whatever.
 
 ## Quick shot of useless stuff about me and AI
 
 - Let's start with the obvious: as long as you're not a millionaire profiting from AI, you should warn everyone against it when it comes to decision processes. The more you are skilled in tech, the more you hate it and want to work on a farm.
-- I am against writing content using AI. I take a 'soft AI' stance: I use AI to help me code boilerplate, to code simple scripts, to correct my poor English grammar if necessary, but I would never (NEVER) make the AI do the work alone and pride myself of it. My blog posts, LessWrong posts etc... are 100% human authored, and then revised by the AI to correct grammar/phrasing errors.
+- I am against writing content using AI. I take a 'soft AI' stance: I use AI to help me code boilerplate, to code simple scripts, and to correct my poor English grammar if necessary.
 - I am against AI generated images used as an 'art' medium, or replacing artists in any way. They are fine for journalists and blog posters, who cares.
 - I am in favour of shutting down all non-research use of generative AI. AI should be used for research purposes only and it is NOT ready for public use.
 - If AI must be used, education should be prioritized. That's why I try to teach people about it.
