@@ -6,13 +6,12 @@ import { monthYear } from "../../lib/content";
 const all = await posts();
 const years = [...Map.groupBy(all, (p) => p.data.date.getFullYear())];
 ---
-<Base title="Blog" description="Federico Torrielli's blog: longer thoughts on AI, alignment, and older posts on Linux and other things.">
+<Base title="Blog" description="Federico Torrielli's blog on AI and alignment.">
   <header class="page-head wrap" data-enter>
     <p class="eyebrow" style="--i:0">{all.length} posts, from 2021 to today</p>
     <h1 style="--i:1">Blog</h1>
     <p class="lead" style="--i:2">
-      Here I write longer thoughts on AI and alignment, when a paper is not the right place for them. The older posts are
-      about Linux, passwords, and other things that I cared about at the time.
+      Longer thoughts on AI and alignment, and a few older posts on other things.
     </p>
     <a class="link feed" href="/blog/index.xml" style="--i:3">RSS feed</a>
   </header>

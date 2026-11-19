@@ -89,14 +89,14 @@ const lines = [
       <article class="sheet">
         <div class="sheet__paper beyond__card">
           <h3><a class="sheet__link" href="/courses/">Courses</a></h3>
-          <p>I teach generative AI to people who use it at work: researchers, public administrations, and companies. These are the last {courses.length} courses I gave.</p>
+          <p>I teach generative AI to people who use it at work.</p>
           <ul class="beyond__list">{courses.slice(0, 3).map((c) => <li>{c.data.title}</li>)}</ul>
         </div>
       </article>
       <article class="sheet">
         <div class="sheet__paper beyond__card">
           <h3><a class="sheet__link" href="/projects/">Projects</a></h3>
-          <p>Projects outside of my papers. Two of them are Italian large language models, Velvet and Minerva.</p>
+          <p>Projects outside of my papers.</p>
           <ul class="beyond__list">{projects.slice(0, 3).map((c) => <li>{c.data.title}</li>)}</ul>
         </div>
       </article>
