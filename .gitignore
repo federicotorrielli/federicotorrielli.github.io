@@ -1,4 +1,6 @@
-# Hugo build artifacts
-public/
-resources/
-.hugo_build.lock
+dist/
+.astro/
+node_modules/
+.taste-skill/
+.superlite/
+deno.lock

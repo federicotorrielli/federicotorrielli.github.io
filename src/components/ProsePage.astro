@@ -1,0 +1,27 @@
+---
+import { getEntry, render } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Crease from "./Crease.astro";
+
+interface Props { id: string; eyebrow: string; heading: string }
+const { id, eyebrow, heading } = Astro.props;
+const page = await getEntry("pages", id);
+if (!page) throw new Error(`Missing page ${id}`);
+const { Content } = await render(page);
+---
+<Base title={page.data.title} description={page.data.description}>
+  <header class="page-head wrap" data-enter>
+    <p class="eyebrow" style="--i:0">{eyebrow}</p>
+    <h1 style="--i:1">{heading}</h1>
+  </header>
+  <div class="wrap">
+    <Crease />
+    <div class="sheet prose-sheet">
+      <div class="sheet__paper prose"><Content /></div>
+    </div>
+  </div>
+</Base>
+<style>
+  .prose-sheet { margin-block: 2.2rem 3rem; max-width: 52rem; }
+  .prose-sheet .sheet__paper { padding: clamp(1.4rem, 4vw, 3rem); }
+</style>

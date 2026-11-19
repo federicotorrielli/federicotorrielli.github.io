@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Icon from "./Icon.astro";
+import { isPreprint, isSelf, linksOf, monthYear, themesOf, venue } from "../lib/content";
+
+interface Props { paper: CollectionEntry<"papers">; headingLevel?: 2 | 3 }
+const { paper, headingLevel = 3 } = Astro.props;
+const { title, author, summary, date } = paper.data;
+const links = linksOf(paper);
+const H = `h${headingLevel}` as "h2" | "h3";
+---
+<article class="sheet slip" data-themes={themesOf(paper).join(" ")}>
+  <div class="sheet__paper slip__paper">
+    <p class="slip__meta">
+      <span class:list={["chip chip--venue", { "chip--preprint": isPreprint(paper) }]}>{venue(paper)}</span>
+      <time datetime={date.toISOString()}>{monthYear(date)}</time>
+    </p>
+    <H class="slip__title">
+      <a class="sheet__link" href={`/papers/${paper.id}/`} transition:name={`paper-${paper.id}`}>{title}</a>
+    </H>
+    <p class="slip__authors">
+      {author.map((a, i) => <>{i > 0 && ", "}{isSelf(a) ? <b>{a}</b> : a}</>)}
+    </p>
+    {summary && <p class="slip__summary">{summary}</p>}
+    <p class="slip__links">
+      {links.primary && <a class="link" href={links.primary} rel="noopener"><Icon name="external" size={15} /> {venue(paper) || "Paper"}</a>}
+      {links.pdf && <a class="link" href={links.pdf} rel="noopener"><Icon name="pdf" size={15} /> PDF</a>}
+      {links.code && <a class="link" href={links.code} rel="noopener"><Icon name="code" size={15} /> Code</a>}
+    </p>
+  </div>
+</article>
+
+<style>
+  .slip__paper { display: flex; flex-direction: column; gap: 0.7rem; }
+  .slip__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin: 0; font-size: 0.85rem; color: var(--muted); }
+  .slip__title { font-size: clamp(1.15rem, 1.8vw, 1.35rem); line-height: 1.22; }
+  .slip__title a { background: linear-gradient(var(--ink), var(--ink)) 0 100% / 0 2px no-repeat; transition: background-size 0.4s var(--ease-fold); }
+  .slip__title a { background-size: 0 1px; }
+  .sheet:hover .slip__title a { background-size: 100% 1px; }
+  .slip__authors { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+  .slip__authors b { color: var(--ink); font-weight: 650; }
+  .slip__summary { margin: 0; font-size: 0.97rem; color: var(--ink-soft); }
+  .slip__links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin: auto 0 0; padding-top: 0.4rem; font-size: 0.88rem; font-weight: 600; }
+  .slip__links a { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 32px; }
+  .slip__links svg { flex: none; }
+</style>

@@ -1,0 +1,156 @@
+---
+import { facets, creaseLines, points } from "../lib/crane";
+import trace from "../data/crane-trace.json";
+
+const all = facets();
+const crease = creaseLines();
+const seg = ([[x1, y1], [x2, y2]]: readonly [readonly number[], readonly number[]]) => ({ x1, y1, x2, y2 });
+
+/** A soft ridge of paper hills across a 400 wide layer. */
+function hills(base: number, amp: number, phase: number, bumps: number) {
+  const step = 400 / bumps;
+  let d = `M-10 ${base}`;
+  for (let i = 0; i < bumps; i++) {
+    const x = i * step;
+    const peak = base - amp * (0.6 + 0.4 * Math.sin(i * 1.7 + phase));
+    d += ` Q${(x + step / 2).toFixed(1)} ${peak.toFixed(1)} ${(x + step).toFixed(1)} ${base}`;
+  }
+  return `${d} L410 460 L-10 460 Z`;
+}
+
+/** Seigaiha style scallops: a row of half circles. */
+function scallops(base: number, r: number, offset = 0) {
+  let d = `M-20 460 L-20 ${base}`;
+  for (let x = -20 + offset; x < 420; x += 2 * r) d += ` A${r} ${r} 0 0 1 ${x + 2 * r} ${base}`;
+  return `${d} L420 460 Z`;
+}
+
+const facetData = JSON.stringify(all.map((f) => ({ a: f.folded, b: f.flat, s: f.shade })));
+---
+<figure class="box" data-shadowbox>
+  <div class="box__stage" aria-hidden="true">
+    <svg class="box__layer" data-depth="2" viewBox="0 0 400 440" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="440" fill="#ecdcbc" />
+      <circle cx="306" cy="96" r="54" fill="var(--saffron)" />
+      <circle cx="306" cy="96" r="72" fill="none" stroke="var(--saffron)" stroke-width="1.5" stroke-dasharray="3 7" opacity=".7" />
+    </svg>
+    <svg class="box__layer" data-depth="5" viewBox="0 0 400 440" preserveAspectRatio="xMidYMid slice">
+      <path d={hills(318, 70, 0.4, 3)} fill="var(--indigo-soft)" />
+    </svg>
+    <svg class="box__layer" data-depth="9" viewBox="0 0 400 440" preserveAspectRatio="xMidYMid slice">
+      <path d={hills(356, 46, 2.1, 4)} fill="var(--teal)" />
+    </svg>
+    <svg class="box__layer box__crane" data-depth="16" viewBox="0 0 400 300" data-crane data-facets={facetData}>
+      <g class="crane__facets">
+        {all.map((f) => <polygon points={points(f.folded)} fill={f.shade} stroke={f.shade} stroke-width=".6" stroke-linejoin="round" />)}
+      </g>
+      <g class="crane__crease" opacity="0" pointer-events="none">
+        {crease.mountain.map((l) => <line {...seg(l)} stroke="var(--ink)" stroke-width="1.1" stroke-dasharray="8 3 1.5 3" />)}
+        {crease.valley.map((l) => <line {...seg(l)} stroke="var(--vermilion)" stroke-width="1.1" stroke-dasharray="6 4" />)}
+      </g>
+    </svg>
+    <svg class="box__layer" data-depth="12" viewBox="0 0 400 440" preserveAspectRatio="xMidYMid slice">
+      <path d={scallops(400, 22)} fill="var(--indigo)" />
+      <path d={scallops(426, 22, 22)} fill="#1a2747" />
+    </svg>
+  </div>
+  <div class="box__trace" data-trace hidden>
+    <p class="box__trace-head"><span class="box__dot" aria-hidden="true"></span>{trace.model} · reasoning while it designs this crane (excerpt)</p>
+    <div class="box__trace-body"><pre aria-hidden="true" data-trace-text></pre></div>
+    <p class="sr-only">The reasoning trace of {trace.model}, generated once while it designed a crane like this one.</p>
+  </div>
+  <script type="application/json" data-trace-json set:html={JSON.stringify({ text: trace.text })} />
+  <button class="box__toggle" type="button" aria-pressed="false" data-crane-toggle>
+    <span data-label>Show crease pattern</span>
+  </button>
+</figure>
+
+<style>
+  .box { position: relative; margin: 0; }
+  .box__trace {
+    position: absolute;
+    left: clamp(18px, 3vw, 28px);
+    right: clamp(18px, 3vw, 28px);
+    bottom: calc(44px + clamp(18px, 3vw, 28px));
+    height: 46%;
+    display: flex;
+    flex-direction: column;
+    background: color-mix(in oklab, var(--sheet) 94%, transparent);
+    box-shadow: var(--shadow-2);
+    animation: trace-in 0.5s var(--ease-fold) both;
+  }
+  .box__trace[hidden] { display: none; }
+  @keyframes trace-in { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+  .box__trace-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0.45rem 0.75rem;
+    border-bottom: 1px dashed var(--rule);
+    font: 600 0.72rem/1.3 var(--sans);
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .box__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--vermilion); animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: 0.25; } }
+  .box__trace-body { flex: 1; overflow-y: auto; padding: 0.6rem 0.75rem; scrollbar-width: thin; }
+  .box__trace-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font: 0.7rem/1.55 var(--mono);
+    color: var(--ink-soft);
+  }
+  .box__trace-body pre::after { content: "▍"; color: var(--vermilion); animation: pulse 1s steps(1) infinite; }
+  .box__stage { border: clamp(10px, 1.6vw, 16px) solid var(--sheet); outline: 1px solid var(--rule); box-shadow: var(--shadow-1); }
+  .box__stage {
+    position: relative;
+    aspect-ratio: 400 / 440;
+    overflow: hidden;
+    background: #ecdcbc;
+    box-shadow: inset 0 8px 18px rgb(60 35 10 / 0.35), inset 0 0 0 1px rgb(60 35 10 / 0.2);
+  }
+  .box__layer {
+    position: absolute;
+    inset: -4%;
+    width: 108%;
+    height: 108%;
+    max-width: none;
+    filter: drop-shadow(0 -3px 2px rgb(40 25 10 / 0.18)) drop-shadow(0 6px 8px rgb(40 25 10 / 0.3));
+    transform: translate3d(var(--px, 0), var(--py, 0), 0);
+    transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    will-change: transform;
+  }
+  .box__layer:first-child { filter: none; }
+  .box__crane {
+    inset: 4% 6% auto;
+    width: 88%;
+    height: auto;
+    filter: drop-shadow(0 14px 10px rgb(40 25 10 / 0.35));
+  }
+  :global(.js) .crane__facets { opacity: 0; }
+  :global(.js) [data-ready] .crane__facets { opacity: 1; }
+  .box__toggle {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 0.4rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: 500 0.88rem/1 var(--sans);
+    color: var(--muted);
+    text-decoration: underline dotted;
+    text-underline-offset: 4px;
+    cursor: pointer;
+  }
+  .box__toggle:hover { color: var(--ink); }
+</style>
+
+<script>
+  import { mountShadowbox } from "../scripts/crane";
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll<HTMLElement>("[data-shadowbox]").forEach(mountShadowbox);
+  });
+</script>

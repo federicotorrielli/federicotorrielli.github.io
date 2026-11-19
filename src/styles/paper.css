@@ -1,0 +1,519 @@
+@import "@fontsource-variable/fraunces/full.css";
+@import "@fontsource-variable/fraunces/full-italic.css";
+@import "@fontsource-variable/instrument-sans/index.css";
+@import "@fontsource-variable/jetbrains-mono/index.css";
+
+/* Washi, sumi and kami: one palette for the whole site. */
+:root {
+  --washi: #f3ede1;
+  --washi-deep: #e9e0cd;
+  --sheet: #fbf8f1;
+  --ink: #1d1b19;
+  --ink-soft: #46413b;
+  --muted: #6b6359;
+  --rule: #d8ccb6;
+  --vermilion: #c4432a;
+  --vermilion-deep: #96301d;
+  --indigo: #24345c;
+  --indigo-soft: #3f5389;
+  --saffron: #e0a03a;
+  --teal: #2c6c66;
+
+  --serif: "Fraunces Variable", "Iowan Old Style", Georgia, serif;
+  --sans: "Instrument Sans Variable", system-ui, sans-serif;
+  --mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  --wrap: min(1180px, 100% - 2 * var(--gutter));
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --radius: 3px;
+  --shadow-1: 0 1px 0 rgb(80 55 25 / 0.08), 0 6px 14px -6px rgb(80 55 25 / 0.22);
+  --shadow-2: 0 1px 0 rgb(80 55 25 / 0.08), 0 16px 28px -10px rgb(80 55 25 / 0.3);
+  --ease-fold: cubic-bezier(0.65, 0, 0.25, 1);
+
+  color-scheme: light;
+}
+
+@property --fold {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 18px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--washi);
+  /* faint crease grid, as on a sheet that was folded and opened again */
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 119px, rgb(120 95 60 / 0.05) 119px 120px),
+    repeating-linear-gradient(-45deg, transparent 0 119px, rgb(120 95 60 / 0.05) 119px 120px);
+  color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--sans);
+  font-optical-sizing: auto;
+}
+
+/* paper fibre grain over everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.38;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+main {
+  flex: 1;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--saffron);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--vermilion);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.wrap {
+  width: var(--wrap);
+  margin-inline: auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  background: var(--ink);
+  color: var(--sheet);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* Type */
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-variation-settings: "SOFT" 30, "WONK" 0;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+}
+
+h3 {
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin: 0 0 1.1rem;
+  font: 600 0.8rem/1.3 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lead {
+  font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 38rem;
+}
+
+/* Links: an ink underline that draws on hover */
+
+.link {
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat;
+  transition: background-size 0.35s var(--ease-fold), color 0.2s;
+}
+
+.link:hover {
+  background-size: 100% 1.5px;
+  color: var(--vermilion-deep);
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 44px;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--sheet);
+  font: 600 0.95rem/1 var(--sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn:hover {
+  background: var(--ink-soft);
+  border-color: var(--ink-soft);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule);
+}
+
+.btn--ghost:hover {
+  background: var(--sheet);
+  border-color: var(--ink);
+}
+
+.btn svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* Sheet: a paper card with a folded corner. The shadow lives on the outer
+   element, because clip-path would cut a box-shadow away. */
+
+.sheet {
+  position: relative;
+  filter: drop-shadow(0 1px 0 rgb(80 55 25 / 0.1)) drop-shadow(0 8px 12px rgb(80 55 25 / 0.14));
+  transition: transform 0.3s var(--ease-fold), filter 0.3s var(--ease-fold), --fold 0.35s var(--ease-fold);
+}
+
+.sheet__paper {
+  height: 100%;
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  background: var(--sheet);
+  clip-path: polygon(0 0, calc(100% - var(--fold)) 0, 100% var(--fold), 100% 100%, 0 100%);
+}
+
+.sheet::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--fold);
+  height: var(--fold);
+  background: linear-gradient(225deg, transparent 50%, var(--washi-deep) 50%, #d9cdb5 100%);
+  filter: drop-shadow(-1px 1px 1px rgb(80 55 25 / 0.18));
+}
+
+.sheet:has(a.sheet__link:hover),
+.sheet:has(a.sheet__link:focus-visible) {
+  --fold: 28px;
+  transform: translateY(-2px);
+  filter: drop-shadow(0 1px 0 rgb(80 55 25 / 0.1)) drop-shadow(0 16px 18px rgb(80 55 25 / 0.2));
+}
+
+.sheet__link {
+  text-decoration: none;
+}
+
+.sheet__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.sheet a:not(.sheet__link) {
+  position: relative;
+  z-index: 2;
+}
+
+/* Crease: mountain fold (dash dot) and valley fold (dash), the two lines of
+   an origami diagram. */
+
+.crease {
+  display: block;
+  width: 100%;
+  height: 14px;
+  color: var(--ink-soft);
+}
+
+.crease--valley {
+  color: var(--muted);
+}
+
+/* Chips */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.18rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 99px;
+  font: 500 0.78rem/1.5 var(--sans);
+  color: var(--ink-soft);
+  background: rgb(255 255 255 / 0.45);
+}
+
+.chip--venue {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--indigo);
+  font-weight: 650;
+}
+
+.chip--preprint {
+  color: var(--muted);
+}
+
+/* Section frame */
+
+.section {
+  padding-block: clamp(4rem, 9vw, 7.5rem);
+}
+
+.section__head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  max-width: 44rem;
+}
+
+.section__head p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.page-head {
+  padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2rem, 4vw, 3rem);
+}
+
+.page-head h1 {
+  max-width: 18ch;
+}
+
+.page-head .lead {
+  margin: 1.25rem 0 0;
+}
+
+/* Prose (markdown) */
+
+.prose {
+  max-width: 44rem;
+  font-size: 1.07rem;
+}
+
+.prose h2 {
+  margin: 2.6rem 0 0.9rem;
+  font-size: 1.65rem;
+}
+
+.prose h3 {
+  margin: 2rem 0 0.6rem;
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.prose a {
+  color: var(--vermilion-deep);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.prose hr {
+  height: 14px;
+  margin: 2.4rem 0;
+  border: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='14'%3E%3Cpath d='M0 7h12M17 7h2' stroke='%2346413b' stroke-width='1.4'/%3E%3C/svg%3E") repeat-x left center;
+  opacity: 0.55;
+}
+
+.prose blockquote {
+  margin: 1.8rem 0;
+  padding: 0.4rem 0 0.4rem 1.4rem;
+  border-left: 3px solid var(--vermilion);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.12rem;
+  color: var(--ink-soft);
+}
+
+.prose pre {
+  position: relative;
+  padding: 1.2rem 1.3rem;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--sheet) !important;
+  font: 0.82rem/1.6 var(--mono);
+  box-shadow: var(--shadow-1);
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+}
+
+.prose ul {
+  padding-left: 1.2rem;
+}
+
+.prose li::marker {
+  color: var(--vermilion);
+}
+
+.prose strong {
+  font-weight: 650;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  min-height: 32px;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--washi);
+  font: 600 0.75rem/1 var(--sans);
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+}
+
+.copy-btn:hover {
+  transform: translateY(-1px);
+  background: var(--saffron);
+}
+
+.copy-btn:active {
+  transform: translateY(1px);
+}
+
+/* Page transitions: sheets slide like paper */
+
+::view-transition-old(root) {
+  animation: 0.28s var(--ease-fold) both sheet-out;
+}
+
+::view-transition-new(root) {
+  animation: 0.42s var(--ease-fold) both sheet-in;
+}
+
+@keyframes sheet-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* Hero entrance, once on load */
+
+[data-enter] > * {
+  animation: enter 0.8s var(--ease-fold) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+.sheet > .prose {
+  max-width: none;
+}

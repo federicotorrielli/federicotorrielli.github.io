@@ -1,0 +1,151 @@
+---
+import { nav, site } from "../lib/site";
+const path = Astro.url.pathname;
+const current = (href: string) => path === href || (href !== "/" && path.startsWith(href));
+---
+<header class="site-header">
+  <nav class="wrap site-header__bar" aria-label="Main">
+    <a href="/" class="site-header__mark" aria-label={`${site.name}, home`}>
+      <svg viewBox="0 0 40 40" width="26" height="26" aria-hidden="true">
+        <polygon points="4,36 20,4 20,24" fill="var(--vermilion)" />
+        <polygon points="20,4 36,36 20,24" fill="var(--vermilion-deep)" />
+        <polygon points="4,36 20,24 36,36" fill="var(--indigo)" />
+      </svg>
+      <span>Federico <b>Torrielli</b></span>
+    </a>
+    <button class="site-header__toggle" aria-expanded="false" aria-controls="site-menu">
+      <span class="sr-only">Menu</span>
+      <span aria-hidden="true"></span>
+    </button>
+    <ul id="site-menu" class="site-header__menu">
+      {nav.map((item) => (
+        <li>
+          <a href={item.href} class="site-header__link" aria-current={current(item.href) ? "page" : undefined}
+            {...(item.external ? { rel: "noopener" } : {})}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in oklab, var(--washi) 86%, transparent);
+    backdrop-filter: blur(10px) saturate(1.2);
+    border-bottom: 1px dashed var(--rule);
+  }
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 68px;
+    gap: 1rem;
+  }
+  .site-header__mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 44px;
+    text-decoration: none;
+    font: 500 1.15rem/1 var(--serif);
+    font-variation-settings: "SOFT" 80;
+  }
+  .site-header__mark b { font-weight: 700; }
+  .site-header__mark svg { transition: transform 0.45s var(--ease-fold); }
+  .site-header__menu {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .site-header__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.85rem;
+    text-decoration: none;
+    font-weight: 550;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+  }
+  .site-header__link::after {
+    content: "";
+    position: absolute;
+    left: 0.85rem;
+    right: 0.85rem;
+    bottom: 8px;
+    height: 2px;
+    background: var(--vermilion);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease-fold);
+  }
+  .site-header__link:hover, .site-header__link[aria-current="page"] { color: var(--ink); }
+  .site-header__link:hover::after, .site-header__link[aria-current="page"]::after { transform: scaleX(1); }
+  .site-header__toggle { display: none; }
+
+  @media (max-width: 760px) {
+    .site-header__toggle {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      background: transparent;
+      cursor: pointer;
+    }
+    .site-header__toggle span[aria-hidden] {
+      width: 20px;
+      height: 2px;
+      background: var(--ink);
+      box-shadow: 0 -6px 0 var(--ink), 0 6px 0 var(--ink);
+      transition: transform 0.3s var(--ease-fold), box-shadow 0.3s;
+    }
+    .site-header__toggle[aria-expanded="true"] span[aria-hidden] { transform: rotate(45deg); box-shadow: 0 0 0 var(--ink); }
+    .site-header__menu {
+      position: fixed;
+      inset: 68px 0 0;
+      flex-direction: column;
+      gap: 0;
+      padding: 1.5rem var(--gutter);
+      background: var(--washi);
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      visibility: hidden;
+      transition: clip-path 0.5s var(--ease-fold), visibility 0s 0.5s;
+    }
+    .site-header__toggle[aria-expanded="true"] + .site-header__menu {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      visibility: visible;
+      transition: clip-path 0.5s var(--ease-fold);
+    }
+    .site-header__link {
+      width: 100%;
+      min-height: 60px;
+      padding: 0;
+      border-bottom: 1px dashed var(--rule);
+      font: 500 1.8rem/1 var(--serif);
+    }
+    .site-header__link::after { display: none; }
+  }
+</style>
+
+<script>
+  const toggle = () => document.querySelector<HTMLButtonElement>(".site-header__toggle");
+  const set = (open: boolean) => {
+    toggle()?.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+  };
+  document.addEventListener("click", (e) => {
+    if ((e.target as Element).closest(".site-header__toggle")) set(toggle()?.getAttribute("aria-expanded") !== "true");
+  });
+  document.addEventListener("keydown", (e) => e.key === "Escape" && set(false));
+  document.addEventListener("astro:before-swap", () => set(false));
+</script>

@@ -1,0 +1,11 @@
+---
+import { getCollection } from "astro:content";
+
+/** Old Hugo taxonomy URLs now land on the paper list. */
+export async function getStaticPaths() {
+  const all = [...(await getCollection("papers")), ...(await getCollection("projects")), ...(await getCollection("courses"))];
+  const slugs = new Set(all.flatMap((e) => e.data.tags).map((t) => t.toLowerCase().replace(/\s+/g, "-")));
+  return [{ params: { slug: undefined } }, ...[...slugs].map((slug) => ({ params: { slug } }))];
+}
+return Astro.redirect("/papers/");
+---

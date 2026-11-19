@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "./Icon.astro";
+import { monthYear, sorted } from "../lib/content";
+
+interface Props { section: "projects" | "courses"; title: string; lead: string; description: string }
+const { section, title, lead, description } = Astro.props;
+const entries = await sorted(section);
+---
+<Base title={title} description={description}>
+  <header class="page-head wrap" data-enter>
+    <p class="eyebrow" style="--i:0">{entries.length} {section}</p>
+    <h1 style="--i:1">{title}</h1>
+    <p class="lead" style="--i:2">{lead}</p>
+  </header>
+  <div class="wrap grid">
+    {entries.map((e) => (
+      <article class="sheet">
+        <div class="sheet__paper card">
+          <time datetime={e.data.date.toISOString()}>{monthYear(e.data.date)}</time>
+          <h2><a class="sheet__link" href={`/${section}/${e.id}/`}>{e.data.title}</a></h2>
+          <p>{e.data.summary ?? e.data.description}</p>
+          <ul class="chips">{e.data.tags.slice(0, 3).map((t) => <li class="chip">{t}</li>)}</ul>
+          <span class="card__more">Open <Icon name="arrow" size={16} /></span>
+        </div>
+      </article>
+    ))}
+  </div>
+</Base>
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: clamp(1rem, 2vw, 1.6rem); padding-bottom: 3rem; }
+  .card { display: flex; flex-direction: column; gap: 0.8rem; }
+  .card time { font-size: 0.85rem; color: var(--muted); }
+  .card h2 { font-size: 1.3rem; line-height: 1.22; }
+  .card p { margin: 0; color: var(--ink-soft); font-size: 0.97rem; }
+  .card__more { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: auto; padding-top: 0.3rem; font-weight: 600; font-size: 0.9rem; color: var(--vermilion-deep); }
+  .card__more svg { transition: transform 0.3s var(--ease-fold); }
+  .sheet:hover .card__more svg { transform: translateX(4px); }
+</style>

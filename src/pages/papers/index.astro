@@ -1,0 +1,92 @@
+---
+import Base from "../../layouts/Base.astro";
+import PaperSlip from "../../components/PaperSlip.astro";
+import { groupByYear, sorted, themes } from "../../lib/content";
+
+const papers = await sorted("papers");
+const years = groupByYear(papers);
+const labels: Record<string, string> = {
+  interpretability: "Interpretability",
+  agents: "Agents",
+  safety: "Safety",
+  people: "Human and AI",
+};
+---
+<Base title="Papers" description="Research papers by Federico Torrielli on mechanistic interpretability, activation verbalizers, agent oversight, AI safety and human and AI interaction.">
+  <header class="page-head wrap" data-enter>
+    <p class="eyebrow" style="--i:0">{papers.length} papers, from 2021 to today</p>
+    <h1 style="--i:1">Papers</h1>
+    <p class="lead" style="--i:2">
+      All my papers, the newest first. Lately I write mostly about activation verbalizers and about the oversight of agents.
+      The older ones are about lexical knowledge, prompting, and how people live with generative AI.
+    </p>
+  </header>
+  <div class="wrap">
+    <div class="filters" role="group" aria-label="Filter papers by theme" data-filters>
+      <button type="button" class="filter" aria-pressed="true" data-theme="">All</button>
+      {themes.map((t) => <button type="button" class="filter" aria-pressed="false" data-theme={t}>{labels[t]}</button>)}
+    </div>
+    {years.map(([year, list]) => (
+      <section class="year" aria-labelledby={`y-${year}`} data-year>
+        <h2 id={`y-${year}`} class="year__label">{year}</h2>
+        <div class="year__list">{list.map((p) => <PaperSlip paper={p} />)}</div>
+      </section>
+    ))}
+  </div>
+</Base>
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; padding-bottom: 2.5rem; border-bottom: 1px dashed var(--rule); }
+  .filter {
+    min-height: 44px;
+    padding: 0.4rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--sheet);
+    font: 600 0.92rem/1 var(--sans);
+    cursor: pointer;
+    transition: transform 0.18s var(--ease-fold), background 0.2s, color 0.2s;
+  }
+  .filter:hover { border-color: var(--ink); }
+  .filter[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--sheet); }
+  .year { display: grid; grid-template-columns: 9rem 1fr; gap: 2rem; padding-block: 2.5rem; border-bottom: 1px dashed var(--rule); }
+  .year[hidden] { display: none; }
+  .year__label {
+    position: sticky;
+    top: 90px;
+    align-self: start;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .year__list { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+  .year__list :global(.sheet[hidden]) { display: none; }
+  @media (max-width: 960px) {
+    .year { grid-template-columns: 1fr; gap: 1rem; }
+    .year__label { position: static; }
+  }
+  @media (max-width: 760px) { .year__list { grid-template-columns: 1fr; } }
+</style>
+<script>
+  function apply(root: HTMLElement, theme: string) {
+    root.querySelectorAll<HTMLButtonElement>("[data-theme]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.theme === theme)));
+    document.querySelectorAll<HTMLElement>("[data-year]").forEach((year) => {
+      const slips = [...year.querySelectorAll<HTMLElement>("[data-themes]")];
+      slips.forEach((s) => (s.hidden = !!theme && !s.dataset.themes!.split(" ").includes(theme)));
+      year.hidden = slips.every((s) => s.hidden);
+    });
+  }
+  document.addEventListener("astro:page-load", () => {
+    const root = document.querySelector<HTMLElement>("[data-filters]");
+    if (!root) return;
+    const url = new URL(location.href);
+    apply(root, url.searchParams.get("theme") ?? "");
+    root.addEventListener("click", (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-theme]");
+      if (!b) return;
+      const theme = b.dataset.theme!;
+      theme ? url.searchParams.set("theme", theme) : url.searchParams.delete("theme");
+      history.replaceState(history.state, "", url);
+      apply(root, theme);
+    });
+  });
+</script>

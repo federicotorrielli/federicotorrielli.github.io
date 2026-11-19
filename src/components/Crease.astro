@@ -1,0 +1,9 @@
+---
+/** A fold line from an origami diagram: mountain is dash dot, valley is dash. */
+interface Props { kind?: "mountain" | "valley" }
+const { kind = "mountain" } = Astro.props;
+const dash = kind === "mountain" ? "12 5 2 5" : "10 6";
+---
+<svg class:list={["crease", `crease--${kind}`]} viewBox="0 0 1000 14" preserveAspectRatio="none" aria-hidden="true">
+  <line x1="0" y1="7" x2="1000" y2="7" stroke="currentColor" stroke-width="1.4" stroke-dasharray={dash} vector-effect="non-scaling-stroke" />
+</svg>

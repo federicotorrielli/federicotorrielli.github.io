@@ -1,0 +1,149 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Shadowbox from "../components/Shadowbox.astro";
+import PaperSlip from "../components/PaperSlip.astro";
+import Crease from "../components/Crease.astro";
+import Icon from "../components/Icon.astro";
+import portrait from "../assets/pfp.webp";
+import { site } from "../lib/site";
+import { sorted } from "../lib/content";
+
+const papers = await sorted("papers");
+const projects = await sorted("projects");
+const courses = await sorted("courses");
+
+const lines = [
+  {
+    title: "Activation verbalizers",
+    text: "A verbalizer turns the activations of a model into text. In my work I measure how confident a verbalizer is when it answers, which token positions need an explanation, and if it still works on a model that was finetuned after its training.",
+    theme: "interpretability",
+  },
+  {
+    title: "Oversight of agents",
+    text: "When many agents talk to each other, new problems show up that a single model does not have. With my colleagues I built an auditor agent that watches these conversations. I also studied the languages that agents invent for themselves on Moltbook.",
+    theme: "agents",
+  },
+  {
+    title: "Safety and human factors",
+    text: "Some of my work looks at the people around these systems. For instance, I studied hidden instructions in papers that reviewers give to a chatbot, how a model can support a person in crisis when it has to decline a request, and how people explain generative AI to themselves.",
+    theme: "safety",
+  },
+];
+---
+<Base>
+  <section class="hero wrap">
+    <div class="hero__text" data-enter>
+      <Image class="hero__photo" style="--i:0" src={portrait} alt="Portrait of Federico Torrielli" width={176} height={176} loading="eager" />
+      <h1 style="--i:1">{site.name}</h1>
+      <p class="hero__role" style="--i:1">{site.role} at the {site.org}</p>
+      <p class="lead" style="--i:2">
+        I study what happens inside language models. More in detail, I work on activation verbalizers: models that read the
+        activations of another model and tell us, in plain words, what is going on in there. Can we trust large language
+        models, at all? An auditor that questions a model about what it is hiding needs a correct answer and a good reason
+        to believe it.
+      </p>
+      <p class="hero__note" style="--i:3">I am also finishing my Ph.D. at the University of Torino.</p>
+      <div class="hero__actions" style="--i:4">
+        <a class="btn" href="/papers/">Papers</a>
+        <a class="btn btn--ghost" href={`mailto:${site.email}`}>Contact</a>
+        <a class="btn btn--ghost" href="https://scholar.google.com/citations?user=mzx5EIYAAAAJ" rel="noopener">Google Scholar</a>
+      </div>
+    </div>
+    <div class="hero__art" data-enter>
+      <div style="--i:2"><Shadowbox /></div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="lines-title">
+    <h2 id="lines-title" class="section__title">Research</h2>
+    <div class="lines">
+      {lines.map((l) => (
+        <article class="sheet">
+          <div class="sheet__paper line">
+            <h3><a class="sheet__link" href={`/papers/?theme=${l.theme}`}>{l.title}</a></h3>
+            <p>{l.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <div class="wrap"><Crease /></div>
+
+  <section class="section wrap" aria-labelledby="recent-title">
+    <div class="section__row">
+      <h2 id="recent-title" class="section__title">Recent papers</h2>
+      <a class="link section__more" href="/papers/">All {papers.length} papers <Icon name="arrow" size={16} /></a>
+    </div>
+    <div class="recent">
+      {papers.slice(0, 4).map((p) => <PaperSlip paper={p} />)}
+    </div>
+  </section>
+
+  <div class="wrap"><Crease /></div>
+
+  <section class="section wrap" aria-labelledby="beyond-title">
+    <h2 id="beyond-title" class="section__title">Teaching and projects</h2>
+    <div class="beyond">
+      <article class="sheet">
+        <div class="sheet__paper beyond__card">
+          <h3><a class="sheet__link" href="/courses/">Courses</a></h3>
+          <p>I teach generative AI to people who use it at work: researchers, public administrations, and companies. These are the last {courses.length} courses I gave.</p>
+          <ul class="beyond__list">{courses.slice(0, 3).map((c) => <li>{c.data.title}</li>)}</ul>
+        </div>
+      </article>
+      <article class="sheet">
+        <div class="sheet__paper beyond__card">
+          <h3><a class="sheet__link" href="/projects/">Projects</a></h3>
+          <p>Projects outside of my papers. Two of them are Italian large language models, Velvet and Minerva.</p>
+          <ul class="beyond__list">{projects.slice(0, 3).map((c) => <li>{c.data.title}</li>)}</ul>
+        </div>
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    min-height: min(calc(100svh - 69px), 820px);
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+  }
+  .hero__text { display: grid; gap: 1.2rem; justify-items: start; }
+  .hero__text > * { margin: 0; }
+  .hero__text :global(.hero__photo) {
+    width: 88px;
+    height: 88px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+  }
+  .hero__role { font: 500 1.15rem/1.4 var(--sans); color: var(--ink-soft); margin-top: -0.4rem; }
+  .hero__note { color: var(--muted); font-size: 0.97rem; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 0.7rem; padding-top: 0.4rem; }
+  .hero__art { max-width: 440px; width: 100%; justify-self: end; }
+
+  .section__title { font-size: clamp(1.6rem, 2.6vw, 2.1rem); margin-bottom: 1.8rem; }
+  .section__row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
+  .section__row .section__title { margin: 0; }
+  .section__more { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; }
+  .lines { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+  .line { display: grid; gap: 0.7rem; align-content: start; }
+  .line p, .beyond__card p { margin: 0; color: var(--ink-soft); font-size: 0.97rem; }
+  .recent, .beyond { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+  .beyond__card { display: grid; gap: 0.7rem; align-content: start; }
+  .beyond__list { margin: 0; padding-left: 1.1rem; font-size: 0.92rem; color: var(--ink-soft); }
+
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero__art { justify-self: start; }
+    .lines { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .recent, .beyond { grid-template-columns: 1fr; }
+  }
+</style>

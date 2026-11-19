@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Icon from "./Icon.astro";
+import Crease from "./Crease.astro";
+import { isPreprint, isSelf, monthYear, venue, type Section } from "../lib/content";
+
+interface Props { entry: CollectionEntry<Section>; section: Section }
+const { entry, section } = Astro.props;
+const { Content } = await render(entry);
+const { title, date, author, tags, description, editPost } = entry.data;
+const isPaper = section === "papers";
+const backLabel = { papers: "All papers", projects: "All projects", courses: "All courses" }[section];
+---
+<Base title={title} description={description} type="article">
+  <article class="entry wrap">
+    <header class="entry__head" data-enter>
+      <a class="entry__back link" href={`/${section}/`} style="--i:0"><span aria-hidden="true">&larr;</span> {backLabel}</a>
+      <p class="entry__meta" style="--i:0">
+        {isPaper && venue(entry) && <span class:list={["chip chip--venue", { "chip--preprint": isPreprint(entry) }]}>{venue(entry)}</span>}
+        <time datetime={date.toISOString()}>{monthYear(date)}</time>
+      </p>
+      <h1 style="--i:1" transition:name={isPaper ? `paper-${entry.id}` : undefined}>{title}</h1>
+      {isPaper && author.length > 0 && (
+        <p class="entry__authors" style="--i:2">{author.map((a, i) => <>{i > 0 && ", "}{isSelf(a) ? <b>{a}</b> : a}</>)}</p>
+      )}
+      <div class="entry__actions" style="--i:3">
+        {editPost && <a class="btn" href={editPost.URL} rel="noopener">Read it on {editPost.Text.replace(/ Preprint$/, "")} <Icon name="external" size={17} /></a>}
+        {tags.length > 0 && <ul class="chips">{tags.map((t) => <li class="chip">{t}</li>)}</ul>}
+      </div>
+    </header>
+    <Crease />
+    <div class="entry__body sheet">
+      <div class="sheet__paper prose"><Content /></div>
+    </div>
+  </article>
+</Base>
+<style>
+  .entry { padding-block: clamp(2.5rem, 6vw, 4.5rem) 2rem; }
+  .entry__head { display: grid; gap: 1.1rem; justify-items: start; max-width: 52rem; padding-bottom: 2.2rem; }
+  .entry__head > * { margin: 0; }
+  .entry__back { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; font-weight: 600; color: var(--ink-soft); }
+  .entry__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; color: var(--muted); font-size: 0.9rem; }
+  .entry h1 { font-size: clamp(2rem, 4.4vw, 3.4rem); }
+  .entry__authors { color: var(--ink-soft); font-size: 1.02rem; }
+  .entry__authors b { color: var(--ink); }
+  .entry__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; }
+  .entry__body { margin-top: 2.2rem; max-width: 52rem; }
+  .entry__body .sheet__paper { padding: clamp(1.4rem, 4vw, 3rem); }
+</style>

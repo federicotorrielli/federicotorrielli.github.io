@@ -1,0 +1,54 @@
+---
+import Crease from "./Crease.astro";
+import Socials from "./Socials.astro";
+import { site } from "../lib/site";
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <Crease />
+    <div class="site-footer__grid">
+      <div>
+        <h2 class="site-footer__big">Contact</h2>
+        <a class="site-footer__mail link" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+      <div class="site-footer__side">
+        <Socials />
+        <p class="site-footer__small">
+          You find me at IMADA, {site.org}, in Odense. The full address is on the <a class="link" href="/location/">location page</a>.
+        </p>
+      </div>
+    </div>
+    <p class="site-footer__colophon">
+      <span>&copy; {new Date().getFullYear()} {site.name}</span>
+    </p>
+  </div>
+</footer>
+<style>
+  .site-footer { padding-block: 3.5rem 2rem; }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 2rem 3rem;
+    align-items: end;
+    padding-block: 2.5rem;
+  }
+  .site-footer__big {
+    margin: 0 0 0.6rem;
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  }
+  .site-footer__mail { font: 500 1.1rem/1.4 var(--mono); color: var(--ink); }
+  .site-footer__side { display: grid; gap: 1rem; justify-items: start; }
+  .site-footer__small { margin: 0; color: var(--muted); font-size: 0.92rem; max-width: 30rem; }
+  .site-footer__colophon {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  @media (max-width: 760px) { .site-footer__grid { grid-template-columns: 1fr; } }
+</style>
