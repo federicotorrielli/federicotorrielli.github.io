@@ -12,4 +12,4 @@ Campusvej 55, 5230&nbsp;Odense&nbsp;M, Denmark
 
 ## Meetings
 
-I primarily work from home. For a meeting, write me at [torrielli@imada.sdu.dk](mailto:torrielli@imada.sdu.dk).
+I primarily work from home. For a meeting, write me at <a href="/location/" data-u="torrielli" data-d="imada.sdu.dk">torrielli [at] imada.sdu.dk</a>.

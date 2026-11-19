@@ -1,11 +1,12 @@
 ---
 import Icon from "./Icon.astro";
-import { socials } from "../lib/site";
+import { site, socials } from "../lib/site";
 ---
 <ul class="socials">
   {socials.map((s) => (
     <li>
       <a href={s.href} class="socials__link" aria-label={s.label} title={s.label}
+        {...("email" in s ? { "data-u": site.email.user, "data-d": site.email.domain } : {})}
         {...(s.href.startsWith("http") ? { rel: "noopener" } : {})}>
         <Icon name={s.icon} size={19} />
       </a>

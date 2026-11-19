@@ -47,7 +47,8 @@ const image = new URL("/pfp.webp", Astro.site);
     <Footer />
     <script>
       import { addCopyButtons } from "../scripts/copy";
-      document.addEventListener("astro:page-load", addCopyButtons);
+      import { revealEmails } from "../scripts/email";
+      document.addEventListener("astro:page-load", () => (addCopyButtons(), revealEmails()));
     </script>
   </body>
 </html>

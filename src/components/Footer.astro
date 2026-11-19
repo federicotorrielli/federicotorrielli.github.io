@@ -9,7 +9,7 @@ import { site } from "../lib/site";
     <div class="site-footer__grid">
       <div>
         <h2 class="site-footer__big">Contact</h2>
-        <a class="site-footer__mail link" href={`mailto:${site.email}`}>{site.email}</a>
+        <a class="site-footer__mail link" href="/location/" data-u={site.email.user} data-d={site.email.domain}>{site.email.shown}</a>
       </div>
       <div class="site-footer__side">
         <Socials />

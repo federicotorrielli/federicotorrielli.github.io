@@ -5,7 +5,8 @@ export const site = {
   orgShort: "SDU",
   description:
     "Federico Torrielli is an AI Safety researcher at the University of Southern Denmark. He works on mechanistic interpretability, in particular on activation verbalizers.",
-  email: "torrielli@imada.sdu.dk",
+  /** Kept in two parts so the full address never appears in the HTML. */
+  email: { user: "torrielli", domain: "imada.sdu.dk", shown: "torrielli [at] imada.sdu.dk" },
   blog: "https://federicotorrielli.me/blog/",
 };
 
@@ -18,7 +19,7 @@ export const nav = [
 ];
 
 export const socials = [
-  { label: "Email", href: `mailto:${site.email}`, icon: "mail" },
+  { label: "Email", href: "/location/", icon: "mail", email: true },
   { label: "Google Scholar", href: "https://scholar.google.com/citations?user=mzx5EIYAAAAJ", icon: "scholar" },
   { label: "GitHub", href: "https://github.com/federicotorrielli", icon: "github" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/federico-torrielli/", icon: "linkedin" },
