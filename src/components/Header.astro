@@ -21,7 +21,7 @@ const current = (href: string) => path === href || (href !== "/" && path.startsW
       {nav.map((item) => (
         <li>
           <a href={item.href} class="site-header__link" aria-current={current(item.href) ? "page" : undefined}
-            {...(item.external ? { rel: "noopener" } : {})}>
+            {...(item.href.startsWith("http") ? { rel: "noopener" } : {})}>
             {item.label}
           </a>
         </li>

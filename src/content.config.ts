@@ -26,7 +26,19 @@ const pages = defineCollection({
   schema: z.object({ title: z.string(), description: z.string().optional() }),
 });
 
+const blog = defineCollection({
+  loader: glob({ base: "./src/content/blog", pattern: "*.md" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    draft: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+    preview_image: z.string().url().optional(),
+  }),
+});
+
 export const collections = {
+  blog,
   papers: section("papers"),
   projects: section("projects"),
   courses: section("courses"),

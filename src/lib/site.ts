@@ -7,7 +7,6 @@ export const site = {
     "Federico Torrielli is an AI Safety researcher at the University of Southern Denmark. He works on mechanistic interpretability, in particular on activation verbalizers.",
   /** Kept in two parts so the full address never appears in the HTML. */
   email: { user: "torrielli", domain: "imada.sdu.dk", shown: "torrielli [at] imada.sdu.dk" },
-  blog: "https://federicotorrielli.me/blog/",
 };
 
 export const nav = [
@@ -15,7 +14,7 @@ export const nav = [
   { label: "Projects", href: "/projects/" },
   { label: "Courses", href: "/courses/" },
   { label: "About", href: "/about/" },
-  { label: "Blog", href: site.blog, external: true },
+  { label: "Blog", href: "/blog/" },
 ];
 
 export const socials = [

@@ -1,0 +1,45 @@
+---
+import { render } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import Crease from "../../../components/Crease.astro";
+import { posts, excerpt } from "../../../lib/blog";
+import { monthYear } from "../../../lib/content";
+import "katex/dist/katex.min.css";
+
+export async function getStaticPaths() {
+  return (await posts()).map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, date, tags, preview_image } = post.data;
+---
+<Base title={title} description={excerpt(post.body ?? "", 160)} type="article">
+  <article class="entry wrap">
+    <header class="entry__head" data-enter>
+      <a class="entry__back link" href="/blog/" style="--i:0"><span aria-hidden="true">&larr;</span> All posts</a>
+      <p class="entry__meta" style="--i:0"><time datetime={date.toISOString()}>{monthYear(date)}</time></p>
+      <h1 style="--i:1">{title}</h1>
+      {tags.length > 0 && <ul class="chips" style="--i:2">{tags.map((t) => <li class="chip">{t}</li>)}</ul>}
+    </header>
+    <Crease />
+    <div class="sheet entry__body">
+      <div class="sheet__paper prose">
+        {preview_image && <img class="entry__cover" src={preview_image} alt="" loading="lazy" />}
+        <Content />
+      </div>
+    </div>
+  </article>
+</Base>
+<style>
+  .entry { padding-block: clamp(2.5rem, 6vw, 4.5rem) 2rem; }
+  .entry__head { display: grid; gap: 1rem; justify-items: start; max-width: 52rem; padding-bottom: 2.2rem; }
+  .entry__head > * { margin: 0; }
+  .entry__back { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; font-weight: 600; color: var(--ink-soft); }
+  .entry__meta { color: var(--muted); font-size: 0.9rem; }
+  .entry h1 { font-size: clamp(2rem, 4.4vw, 3.2rem); }
+  .entry__body { margin-top: 2.2rem; max-width: 52rem; }
+  .entry__body .sheet__paper { padding: clamp(1.4rem, 4vw, 3rem); }
+  .entry__cover { width: 100%; height: auto; margin-bottom: 2rem; border: 1px solid var(--rule); }
+  .prose :global(img) { height: auto; }
+  .prose :global(.katex-display) { overflow-x: auto; overflow-y: hidden; padding-block: 0.3rem; }
+</style>

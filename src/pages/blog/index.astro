@@ -1,0 +1,49 @@
+---
+import Base from "../../layouts/Base.astro";
+import { posts, excerpt, postUrl } from "../../lib/blog";
+import { monthYear } from "../../lib/content";
+
+const all = await posts();
+const years = [...Map.groupBy(all, (p) => p.data.date.getFullYear())];
+---
+<Base title="Blog" description="Federico Torrielli's blog: longer thoughts on AI, alignment, and older posts on Linux and other things.">
+  <header class="page-head wrap" data-enter>
+    <p class="eyebrow" style="--i:0">{all.length} posts, from 2021 to today</p>
+    <h1 style="--i:1">Blog</h1>
+    <p class="lead" style="--i:2">
+      Here I write longer thoughts on AI and alignment, when a paper is not the right place for them. The older posts are
+      about Linux, passwords, and other things that I cared about at the time.
+    </p>
+    <a class="link feed" href="/blog/index.xml" style="--i:3">RSS feed</a>
+  </header>
+  <div class="wrap">
+    {years.map(([year, list]) => (
+      <section class="year" aria-labelledby={`y-${year}`}>
+        <h2 id={`y-${year}`} class="year__label">{year}</h2>
+        <ol class="posts">
+          {list.map((p) => (
+            <li class="post">
+              <time datetime={p.data.date.toISOString()}>{monthYear(p.data.date)}</time>
+              <h3><a class="link" href={postUrl(p)}>{p.data.title}</a></h3>
+              <p>{excerpt(p.body ?? "")}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </div>
+</Base>
+<style>
+  .feed { display: inline-block; margin-top: 1rem; font-weight: 600; font-size: 0.92rem; }
+  .year { display: grid; grid-template-columns: 9rem 1fr; gap: 2rem; padding-block: 2.2rem; border-top: 1px dashed var(--rule); }
+  .year__label { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; color: var(--muted); align-self: start; position: sticky; top: 90px; }
+  .posts { display: grid; gap: 1.8rem; margin: 0; padding: 0; list-style: none; max-width: 46rem; }
+  .post { display: grid; gap: 0.35rem; }
+  .post time { font-size: 0.85rem; color: var(--muted); }
+  .post h3 { font-size: 1.3rem; }
+  .post p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; }
+  @media (max-width: 760px) {
+    .year { grid-template-columns: 1fr; gap: 1rem; }
+    .year__label { position: static; }
+  }
+</style>
